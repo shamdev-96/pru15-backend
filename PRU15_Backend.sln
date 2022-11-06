@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.810.25
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRU15_Backend", "PRU15_Backend\PRU15_Backend.csproj", "{ECDB0CE5-484C-4CD4-9C2C-49AF65B147BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRU15_Shared", "PRU15_Shared\PRU15_Shared.csproj", "{E672655F-CCD2-460F-BA7A-27546F6A6F7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECDB0CE5-484C-4CD4-9C2C-49AF65B147BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECDB0CE5-484C-4CD4-9C2C-49AF65B147BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECDB0CE5-484C-4CD4-9C2C-49AF65B147BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECDB0CE5-484C-4CD4-9C2C-49AF65B147BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E672655F-CCD2-460F-BA7A-27546F6A6F7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E672655F-CCD2-460F-BA7A-27546F6A6F7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E672655F-CCD2-460F-BA7A-27546F6A6F7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E672655F-CCD2-460F-BA7A-27546F6A6F7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8559360D-6877-40AA-9417-6A740D974AE5}
+	EndGlobalSection
+EndGlobal
