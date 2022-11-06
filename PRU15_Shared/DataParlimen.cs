@@ -7,6 +7,6 @@ namespace PRU15_Shared
         public string Negeri { get; set; }
         public string KodParlimen { get; set; }
         public string NamaParlimen { get; set; }
-
+        public string JumlahCalon { get; set; }
     }
 }

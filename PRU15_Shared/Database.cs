@@ -70,6 +70,74 @@ namespace PRU15_Shared
 
             }
 
+        public void InsertDataParliament()
+        {
+            var listData = GetCalon();
+
+            List<DataParlimen> datas = new List<DataParlimen>();
+
+            foreach (var item in listData)
+            {
+                if (!datas.Exists((DataParlimen obj) => obj.KodParlimen == item.KodParlimen))
+                {
+                    datas.Add(new DataParlimen
+                    {
+                        KodParlimen = item.KodParlimen,
+                        NamaParlimen = item.NamaParlimen,
+                        Negeri = item.Negeri,
+                        JumlahCalon = JumlahCalon(item.KodParlimen).ToString(),
+                    });
+                }
+
+            }
+
+            foreach(var item in datas)
+            {
+                InsertOrUpdateData(item);
+            }
+
+            
+        }
+
+        public int JumlahCalon(string kodParliment)
+        {
+            List<string> listData = new List<string>();
+
+            try
+            {
+                using (sqlite_conn)
+                {
+                    sqlite_conn.Open();
+                    var command = sqlite_conn.CreateCommand();
+
+                    command.CommandText =
+                          $@"select Kod_Parlimen from Calon where Kod_Parlimen = '{kodParliment.ToUpper()}'";
+                
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            listData.Add(reader["Kod_Parlimen"].ToString());
+                       
+                        }
+                    }
+                }
+
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sqlite_conn.Close();
+            }
+
+            return listData.Count;
+        }
+
         public List<DataParlimen> GetParliament(string negeri = null)
         {
             List<DataParlimen> listTokenData = new List<DataParlimen>();
@@ -84,11 +152,11 @@ namespace PRU15_Shared
                     if(string.IsNullOrEmpty(negeri))
                     {
                         command.CommandText =
-                            @"SELECT Code, Name, State FROM 'Parliament'";
+                            @"SELECT Code, Name, State, Jumlah_Calon FROM 'Parliament'";
                     }
                     else
                     {
-                        command.CommandText = $@"SELECT Code, Name, State FROM Parliament Where State = '{negeri.ToUpper()}'";
+                        command.CommandText = $@"SELECT Code, Name, State, Jumlah_Calon FROM Parliament Where State = '{negeri.ToUpper()}'";
 
                     }
 
@@ -113,9 +181,8 @@ namespace PRU15_Shared
                                 KodParlimen = reader["Code"].ToString(),
                                 NamaParlimen = reader["Name"].ToString(),
                                 Negeri = reader["State"].ToString(),
-
-
-                            }); ; ;
+                                JumlahCalon = reader["Jumlah_Calon"].ToString()
+                            }) ; 
                         }
                     }
                 }
@@ -145,13 +212,19 @@ namespace PRU15_Shared
 
                     var command = sqlite_conn.CreateCommand();
 
-                    if (string.IsNullOrEmpty(kodParlimen))
+                    if (string.IsNullOrEmpty(kodParlimen) && string.IsNullOrEmpty(negeri))
+                    {
+                        command.CommandText =
+                       $@"SELECT Nama_Calon, Nama_Parlimen, Nama_Parti, Negeri, Kod_Parlimen FROM Calon";
+                    }
+
+                    else if (string.IsNullOrEmpty(kodParlimen))
                     {
                         command.CommandText =
                             $@"SELECT Nama_Calon, Nama_Parlimen, Nama_Parti, Negeri, Kod_Parlimen FROM 'Calon'
                                 WHERE Negeri = '{negeri.ToUpper()}'";
                     }
-                    else
+                    else 
                     {
                         command.CommandText =
                            $@"SELECT Nama_Calon, Nama_Parlimen, Nama_Parti, Negeri, Kod_Parlimen FROM 'Calon'
@@ -238,43 +311,38 @@ namespace PRU15_Shared
 
         public void InsertOrUpdateData(DataParlimen tokenData)
             {
-                try
+            try
+            {
+                using (sqlite_conn)
                 {
-                    using (sqlite_conn)
+
+                    var command = sqlite_conn.CreateCommand();
+                    if (!CheckIfDataExist(tokenData.KodParlimen))
                     {
 
-                        var command = sqlite_conn.CreateCommand();
-                        if (CheckIfDataExist(tokenData.KodParlimen))
-                        {
-                            //update
-                            command.CommandText =
-                            @"UPDATE Parliament SET Name=$name ,State=$state";
-                        }
-                        else
-                        {
+                        command.CommandText = @"INSERT INTO Parliament ('Code', 'Name', 'State' , 'Jumlah_Calon')
+                        VALUES($code, $name, $state ,$jumlah_calon )";
 
-                            command.CommandText = @"INSERT INTO Parliament ('Code', 'Name', 'State')
-                        VALUES($code, $name, $state)";
-                        }
 
                         sqlite_conn.Open();
 
                         command.Parameters.AddWithValue("$code", tokenData.KodParlimen);
                         command.Parameters.AddWithValue("$name", tokenData.NamaParlimen);
                         command.Parameters.AddWithValue("$state", tokenData.Negeri);
+                        command.Parameters.AddWithValue("$jumlah_calon", tokenData.JumlahCalon);
 
                         command.ExecuteNonQuery();
                     }
                 }
-                catch (System.Exception ex)
-                {
-                    Console.WriteLine($"Error when save to database : {ex.Message} ");
-                    Console.ReadKey();
-                }
-                finally
-                {
-                    sqlite_conn.Close();
-                }
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine($"Error when save to database : {ex.Message} ");
+            }
+            finally
+            {
+                sqlite_conn.Close();
+            }
             }
 
             private bool CheckIfDataExist(string code)

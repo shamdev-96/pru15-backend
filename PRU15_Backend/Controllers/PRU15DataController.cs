@@ -12,6 +12,7 @@ namespace PRU15_Backend.Controllers
         [HttpGet]
         public string Get()
         {
+            //Database.Instance.InsertDataParliament();
             return "Backend Data for PRU15";
         }
 
@@ -19,16 +20,32 @@ namespace PRU15_Backend.Controllers
         [Route("parlimen")]
         public List<DataParlimen> GetParlimen(string negeri)
         {
+            try
+            {
             var data = Database.Instance.GetParliament(negeri);
-            return data;
+                return data;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [HttpGet]
         [Route("calon")]
         public List<DataCalon> GetCalon(string negeri , string kodParlimen)
         {
-            var data = Database.Instance.GetCalon(negeri , kodParlimen);
-            return data;
+            try
+            {
+                var data = Database.Instance.GetCalon(negeri, kodParlimen);
+                return data;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
