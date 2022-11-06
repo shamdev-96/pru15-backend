@@ -578,11 +578,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Volumes/Sham's Data/pru15-backend/PRU15_Shared/PRU15_Shared.csproj",
+      "projectUniqueName": "/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/PRU15_Shared.csproj",
       "projectName": "PRU15_Shared",
-      "projectPath": "/Volumes/Sham's Data/pru15-backend/PRU15_Shared/PRU15_Shared.csproj",
+      "projectPath": "/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/PRU15_Shared.csproj",
       "packagesPath": "/Users/mac/.nuget/packages/",
-      "outputPath": "/Volumes/Sham's Data/pru15-backend/PRU15_Shared/obj/",
+      "outputPath": "/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/mac/.config/NuGet/NuGet.Config"

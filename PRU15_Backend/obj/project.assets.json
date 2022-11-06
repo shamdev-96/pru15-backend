@@ -302,11 +302,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Volumes/Sham's Data/pru15-backend/PRU15_Backend/PRU15_Backend.csproj",
+      "projectUniqueName": "/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Backend/PRU15_Backend.csproj",
       "projectName": "PRU15_Backend",
-      "projectPath": "/Volumes/Sham's Data/pru15-backend/PRU15_Backend/PRU15_Backend.csproj",
+      "projectPath": "/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Backend/PRU15_Backend.csproj",
       "packagesPath": "/Users/mac/.nuget/packages/",
-      "outputPath": "/Volumes/Sham's Data/pru15-backend/PRU15_Backend/obj/",
+      "outputPath": "/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/mac/.config/NuGet/NuGet.Config"
@@ -321,8 +321,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "/Volumes/Sham's Data/pru15-backend/PRU15_Shared/PRU15_Shared.csproj": {
-              "projectPath": "/Volumes/Sham's Data/pru15-backend/PRU15_Shared/PRU15_Shared.csproj"
+            "/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/PRU15_Shared.csproj": {
+              "projectPath": "/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/PRU15_Shared.csproj"
             }
           }
         }

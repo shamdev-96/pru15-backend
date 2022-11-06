@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="pru15-backend" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^/Volumes/Sham's\ Data/pru15-backend/pru15-backend/PRU15_Backend/obj/Release/netcoreapp3\.1/PubTmp/Out/$" />
+  </parameter>
+</parameters>

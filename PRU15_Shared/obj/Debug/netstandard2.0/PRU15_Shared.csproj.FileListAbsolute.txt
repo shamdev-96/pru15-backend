@@ -18,3 +18,13 @@
 /Volumes/Sham's Data/pru15-backend/PRU15_Shared/obj/Debug/netstandard2.0/PRU15_Shared.csproj.CoreCompileInputs.cache
 /Volumes/Sham's Data/pru15-backend/PRU15_Shared/obj/Debug/netstandard2.0/PRU15_Shared.dll
 /Volumes/Sham's Data/pru15-backend/PRU15_Shared/obj/Debug/netstandard2.0/PRU15_Shared.pdb
+/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/bin/Debug/netstandard2.0/PRU15_Shared.deps.json
+/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/bin/Debug/netstandard2.0/PRU15_Shared.dll
+/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/bin/Debug/netstandard2.0/PRU15_Shared.pdb
+/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/obj/Debug/netstandard2.0/PRU15_Shared.csproj.AssemblyReference.cache
+/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/obj/Debug/netstandard2.0/PRU15_Shared.GeneratedMSBuildEditorConfig.editorconfig
+/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/obj/Debug/netstandard2.0/PRU15_Shared.AssemblyInfoInputs.cache
+/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/obj/Debug/netstandard2.0/PRU15_Shared.AssemblyInfo.cs
+/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/obj/Debug/netstandard2.0/PRU15_Shared.csproj.CoreCompileInputs.cache
+/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/obj/Debug/netstandard2.0/PRU15_Shared.dll
+/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/obj/Debug/netstandard2.0/PRU15_Shared.pdb

@@ -1,0 +1,36 @@
+﻿<Properties StartupConfiguration="{ECDB0CE5-484C-4CD4-9C2C-49AF65B147BA}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PRU15_Backend/Controllers/PRU15DataController.cs">
+    <Files>
+      <File FileName="PRU15_Backend/appsettings.json" Line="11" Column="1" />
+      <File FileName="PRU15_Backend/Properties/launchSettings.json" Line="17" Column="48" />
+      <File FileName="PRU15_Backend/Controllers/PRU15DataController.cs" Line="14" Column="1" />
+      <File FileName="PRU15_Shared/Database.cs" Line="24" Column="20" />
+      <File FileName="PRU15_Backend/Startup.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="PRU15_Backend" expanded="True">
+            <Node name="PRU15_Backend" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="PRU15DataController.cs" selected="True" />
+              </Node>
+            </Node>
+            <Node name="PRU15_Shared" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.PRU15__Backend PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Shared/Database.cs" relfile="PRU15_Shared/Database.cs" line="29" column="1" />
+      <Breakpoint file="/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Backend/Controllers/PRU15DataController.cs" relfile="PRU15_Backend/Controllers/PRU15DataController.cs" line="30" column="1" />
+      <Breakpoint file="/Volumes/Sham's Data/pru15-backend/pru15-backend/PRU15_Backend/Controllers/PRU15DataController.cs" relfile="PRU15_Backend/Controllers/PRU15DataController.cs" line="14" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
