@@ -9,6 +9,7 @@ namespace PRU15_Shared
         public string NamaParlimen { get; set; }
         public string NamaCalon { get; set; }
         public string NamaParti { get; set; }
+        public string Jumlah_Undian { get; set; }
         //public string NamaKumpulan { get; set; }
     }
 }

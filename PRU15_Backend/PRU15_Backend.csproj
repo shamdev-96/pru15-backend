@@ -6,8 +6,21 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\PRU15_Shared\PRU15_Shared.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
+    <None Remove="docker" />
+    <None Remove="PRU15_Shared" />
+    <None Remove="Dependencies\" />
+    <None Remove="Microsoft.Data.SqlClient" />
+    <None Remove="Microsoft.Data.Sqlite" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="PRU15_Shared">
+      <HintPath>Dependencies\PRU15_Shared.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

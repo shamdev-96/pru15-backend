@@ -7,68 +7,68 @@ namespace PRU15_Shared
 {
 
     public class Database
+    {
+        #region Singleton pattern
+        /// <summary>
+        /// Singleton
+        /// </summary>
+        private static readonly Database _instance = new Database();
+        #endregion
+
+
+        private SqliteConnection sqlite_conn;
+        //private List<TokenViewModel> listTokenViewModel;
+        Database()
         {
-            #region Singleton pattern
-            /// <summary>
-            /// Singleton
-            /// </summary>
-            private static readonly Database _instance = new Database();
-            #endregion
-
-
-            private SqliteConnection sqlite_conn;
-            //private List<TokenViewModel> listTokenViewModel;
-            Database()
+            // Create a new database connection:
+            try
             {
-                // Create a new database connection:
-                try
-                {
                 string currentProjectDir = Environment.CurrentDirectory;
                 string projectDirectory = currentProjectDir.Contains("bin") ? Directory.GetParent(Environment.CurrentDirectory).FullName :
                      Directory.GetParent(Environment.CurrentDirectory).FullName;
                 string cs = $"Data Source={currentProjectDir}/pru15data.db";
                 sqlite_conn = new SqliteConnection(cs);
-                    //SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
-                }
-                catch (Exception ex)
-                {
+                //SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine($"Error when initializing  database : {ex.Message} ");
                 Console.ReadKey();
             }
 
-            }
-            public static Database Instance
-            {
-                get { return _instance; }
-            }
+        }
+        public static Database Instance
+        {
+            get { return _instance; }
+        }
 
-            public void InitializeDatabase()
+        public void InitializeDatabase()
+        {
+            try
             {
-                try
+                using (sqlite_conn)
                 {
-                    using (sqlite_conn)
-                    {
-                        sqlite_conn.Open();
+                    sqlite_conn.Open();
 
-                        var command = sqlite_conn.CreateCommand();
-                        command.CommandText =
-                            @"INSERT INTO Token ('Symbol', 'Name', 'TotalSupply', 'ContactAddress', 'TotalHolders')
+                    var command = sqlite_conn.CreateCommand();
+                    command.CommandText =
+                        @"INSERT INTO Token ('Symbol', 'Name', 'TotalSupply', 'ContactAddress', 'TotalHolders')
                         VALUES('VEN', 'Vechain', 35987133, '0xd850942ef8811f2a866692a623011bde52a462c1', 65),
                         ('ZIR', 'Zilliqa', 53272942, '0x05f4a42e251f2d52b8ed15e9fedaacfcef1fad27', 54),
                         ('MKR', 'Maker', 45987133, '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2', 567),
                         ('BNB', 'BNB', 16579517, '0xB8c77482e45F1F44dE1745F52C74426C631bDD52', 4234234)";
 
 
-                        command.ExecuteNonQuery();
-                    }
+                    command.ExecuteNonQuery();
                 }
-                catch (System.Exception ex)
-                {
-                    string msgv = ex.Message;
-                }
-
-
             }
+            catch (System.Exception ex)
+            {
+                string msgv = ex.Message;
+            }
+
+
+        }
 
         public void InsertDataParliament()
         {
@@ -78,25 +78,24 @@ namespace PRU15_Shared
 
             foreach (var item in listData)
             {
-                if (!datas.Exists((DataParlimen obj) => obj.KodParlimen == item.KodParlimen))
-                {
+   
                     datas.Add(new DataParlimen
                     {
-                        KodParlimen = item.KodParlimen,
+                        KodParlimen = item.KodParlimen.Trim().Replace(" " , string.Empty),
                         NamaParlimen = item.NamaParlimen,
                         Negeri = item.Negeri,
                         JumlahCalon = JumlahCalon(item.KodParlimen).ToString(),
                     });
-                }
+                
 
             }
 
-            foreach(var item in datas)
+            foreach (var item in datas)
             {
                 InsertOrUpdateData(item);
             }
 
-            
+
         }
 
         public int JumlahCalon(string kodParliment)
@@ -112,7 +111,7 @@ namespace PRU15_Shared
 
                     command.CommandText =
                           $@"select Kod_Parlimen from Calon where Kod_Parlimen = '{kodParliment.ToUpper()}'";
-                
+
 
                     using (var reader = command.ExecuteReader())
                     {
@@ -120,7 +119,7 @@ namespace PRU15_Shared
                         {
 
                             listData.Add(reader["Kod_Parlimen"].ToString());
-                       
+
                         }
                     }
                 }
@@ -149,7 +148,7 @@ namespace PRU15_Shared
 
                     var command = sqlite_conn.CreateCommand();
 
-                    if(string.IsNullOrEmpty(negeri))
+                    if (string.IsNullOrEmpty(negeri))
                     {
                         command.CommandText =
                             @"SELECT Code, Name, State, Jumlah_Calon FROM 'Parliament'";
@@ -166,7 +165,7 @@ namespace PRU15_Shared
                         while (reader.Read())
                         {
                             string parliment_dun;
-                            if(reader["Code"].ToString().StartsWith("P"))
+                            if (reader["Code"].ToString().StartsWith("P"))
                             {
                                 parliment_dun = "PARLIMEN";
                             }
@@ -182,7 +181,7 @@ namespace PRU15_Shared
                                 NamaParlimen = reader["Name"].ToString(),
                                 Negeri = reader["State"].ToString(),
                                 JumlahCalon = reader["Jumlah_Calon"].ToString()
-                            }) ; 
+                            });
                         }
                     }
                 }
@@ -201,7 +200,7 @@ namespace PRU15_Shared
 
         }
 
-        public List<DataCalon> GetCalon(string negeri = null , string kodParlimen = null)
+        public List<DataCalon> GetCalon(string negeri = null, string kodParlimen = null)
         {
             List<DataCalon> listCalon = new List<DataCalon>();
             try
@@ -224,12 +223,12 @@ namespace PRU15_Shared
                             $@"SELECT Nama_Calon, Nama_Parlimen, Nama_Parti, Negeri, Kod_Parlimen FROM 'Calon'
                                 WHERE Negeri = '{negeri.ToUpper()}'";
                     }
-                    else 
+                    else
                     {
                         command.CommandText =
                            $@"SELECT Nama_Calon, Nama_Parlimen, Nama_Parti, Negeri, Kod_Parlimen FROM 'Calon'
                                 WHERE Negeri = '{negeri.ToUpper()}' AND Kod_Parlimen = '{kodParlimen.ToUpper()}'";
-                    }          
+                    }
 
 
                     using (var reader = command.ExecuteReader())
@@ -310,14 +309,14 @@ namespace PRU15_Shared
         //}
 
         public void InsertOrUpdateData(DataParlimen tokenData)
-            {
+        {
             try
             {
                 using (sqlite_conn)
                 {
 
                     var command = sqlite_conn.CreateCommand();
-                    if (!CheckIfDataExist(tokenData.KodParlimen))
+                    if (!CheckIfDataExist(tokenData.KodParlimen , tokenData.NamaParlimen))
                     {
 
                         command.CommandText = @"INSERT INTO Parliament ('Code', 'Name', 'State' , 'Jumlah_Calon')
@@ -343,75 +342,77 @@ namespace PRU15_Shared
             {
                 sqlite_conn.Close();
             }
-            }
+        }
 
-            private bool CheckIfDataExist(string code)
+        private bool CheckIfDataExist(string code, string name)
+        {
+            int counterCheck = 0;
+            try
             {
-                int counterCheck = 0;
-                try
+                using (sqlite_conn)
                 {
-                    using (sqlite_conn)
+                    sqlite_conn.Open();
+                    var command = sqlite_conn.CreateCommand();
+
+                    command.CommandText =
+                        @"SELECT Name FROM Parliament Where Code=$code AND Name=$name";
+
+                    command.Parameters.AddWithValue("$code", code);
+                    command.Parameters.AddWithValue("$name", name);
+
+
+                    using (var reader = command.ExecuteReader())
                     {
-                        sqlite_conn.Open();
-                        var command = sqlite_conn.CreateCommand();
-
-                        command.CommandText =
-                            @"SELECT Name FROM Parliament Where Code=$code";
-
-                        command.Parameters.AddWithValue("$code", code);
-
-                        using (var reader = command.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                counterCheck++;
-                            }
+                            counterCheck++;
                         }
                     }
-
-                    return counterCheck > 0;
-                }
-                catch (System.Exception)
-                {
-                    throw;
-                }
-                finally
-                {
-                    sqlite_conn.Close();
                 }
 
+                return counterCheck > 0;
             }
-            /// <summary>
-            /// Update token price in database from API calling response. Occurs every 5 minutes
-            /// </summary>
-            /// <param name="symbol">Token Symbol</param>
-            /// <param name="price">Updated token price from API</param>
-            public void UpdateTokenPrice(string symbol, decimal price)
+            catch (System.Exception)
             {
-                try
-                {
-                    using (sqlite_conn)
-                    {
-                        sqlite_conn.Open();
+                throw;
+            }
+            finally
+            {
+                sqlite_conn.Close();
+            }
 
-                        var command = sqlite_conn.CreateCommand();
-                        command.CommandText =
-                            @"UPDATE Token SET Price = $price WHERE Symbol = $symbol ";
-                        command.Parameters.AddWithValue("$price", price);
-                        command.Parameters.AddWithValue("$symbol", symbol);
-                        var value = command.ExecuteNonQuery();
-                        Console.WriteLine($"Row(s) updated: {value}");
-                    }
-                }
-                catch (System.Exception ex)
+        }
+        /// <summary>
+        /// Update token price in database from API calling response. Occurs every 5 minutes
+        /// </summary>
+        /// <param name="symbol">Token Symbol</param>
+        /// <param name="price">Updated token price from API</param>
+        public void UpdateTokenPrice(string symbol, decimal price)
+        {
+            try
+            {
+                using (sqlite_conn)
                 {
-                    throw ex;
+                    sqlite_conn.Open();
+
+                    var command = sqlite_conn.CreateCommand();
+                    command.CommandText =
+                        @"UPDATE Token SET Price = $price WHERE Symbol = $symbol ";
+                    command.Parameters.AddWithValue("$price", price);
+                    command.Parameters.AddWithValue("$symbol", symbol);
+                    var value = command.ExecuteNonQuery();
+                    Console.WriteLine($"Row(s) updated: {value}");
                 }
-                finally
-                {
-                    sqlite_conn.Close();
-                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sqlite_conn.Close();
             }
         }
-    
+    }
+
 }
